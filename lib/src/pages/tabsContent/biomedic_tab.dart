@@ -29,6 +29,7 @@ class BiomedicTabView extends StatelessWidget {
   }
 
   Widget _customCard(BuildContext context, int i) {
+    String cardType = (textTitle == 'catálogo') ? 'Categoría' : 'Material';
     final card = Container(
       child: Column(
         children: <Widget>[
@@ -45,7 +46,7 @@ class BiomedicTabView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Categoría ${i + 1}', style: TextStyle(fontSize: 24.0)),
+                Text('$cardType ${i + 1}', style: TextStyle(fontSize: 24.0)),
                 SizedBox(height: 10.0),
                 Text('Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae, dolorum. Consectetur nemo iusto dolor inventore dignissimos vitae, aspernatur est, nulla a odio temporibus, minus placeat non qui dolores fugiat quas.',
                   textAlign: TextAlign.justify
