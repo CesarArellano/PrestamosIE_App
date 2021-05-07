@@ -52,7 +52,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginCard() {
-
     return Center(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -162,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
           if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
           }
-          
+
           Navigator.pushReplacementNamed(context, 'home');
         },
         icon: Icon(Icons.login),

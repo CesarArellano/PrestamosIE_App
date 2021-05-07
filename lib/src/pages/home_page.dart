@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:prestamos_ibero/src/pages/tabsContent/biomedic_tab.dart';
 import 'package:prestamos_ibero/src/pages/tabsContent/electronics_tab.dart';
+import 'package:prestamos_ibero/src/pages/tabsContent/mechanics_tab.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -54,9 +56,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     return TabBarView(
       controller: _tabController,
       children: <Widget>[
-        ElectronicsTabs(),
-        Center(child: Text('Biomédica')),
-        Center(child: Text('Mecánica')),
+        ElectronicsTabView('catálogo', true),
+        BiomedicTabView('catálogo', true),
+        MechanicsTabView('catálogo', true),
       ],
     );
   }
