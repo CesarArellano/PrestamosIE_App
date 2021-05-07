@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:prestamos_ibero/src/themes/inputs_decorator.dart';
+import 'package:prestamos_ibero/src/themes/text_styles.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -18,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   List<String> _users = ['Alumno', 'Profesor', 'Laboratorista'];
 
-  String _userSelected;
+  String _userSelected = 'Alumno';
 
   @override
   Widget build(BuildContext context) {
@@ -55,24 +57,22 @@ class _LoginPageState extends State<LoginPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         width: double.infinity,
-        height: 400.0,
+        height: 450.0,
         child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
           color: Colors.red,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset('assets/img/logoIBERO.png',
+                width: 120.0,  
+              ),
+              SizedBox(height: 20.0),
               Text('Iniciar Sesión', style: TextStyle(fontSize: 30.0,color: Colors.white)),
               _loginForm(),
-              ElevatedButton.icon(
-                onPressed: () {},
-                icon: Icon(Icons.login),
-                label: Text('Entrar'),                
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                  onPrimary: Colors.red,
-                ),
-
-              )
+              _loginButton()
             ],
           ),
         ),
@@ -87,12 +87,13 @@ class _LoginPageState extends State<LoginPage> {
         key: _claveLogin,
         child: Column(
           children: [
+            SizedBox(height: 20.0),
             _inputAccount(),
             SizedBox(height: 10.0),
             _inputPassword(),
             SizedBox(height: 10.0),
             _userDrowpdown(),
-            SizedBox(height: 30.0),
+            SizedBox(height: 20.0),
           ],
         ),
       ),
@@ -100,21 +101,39 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _inputAccount() {
-    return TextFormField(    
+    return TextFormField(
+      style: loginInputText,
+      decoration: decorationInputSmall('No. de cuenta'),
       keyboardType: TextInputType.name,
       controller: _inputAccountController,
+      validator: (value) {
+        if(value.isEmpty) {
+          return 'Ingrese su no. de cuenta';
+        }
+        return null;
+      },
     );
   }
 
   Widget _inputPassword() {
-    return TextFormField( 
+    return TextFormField(
+      style: loginInputText,
+      decoration: decorationInputSmall('Contraseña'),
       controller: _inputPasswordController,
       obscureText: true,
+      validator: (value) {
+        if(value.isEmpty) {
+          return 'Ingrese su contraseña';
+        }
+        return null;
+      },
     );
   }
 
   Widget _userDrowpdown() {
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField<String>(      
+      style: loginInputText,
+      decoration: decorationInputSmall(''),
       value: _userSelected,
       onChanged: (value) =>
           setState(() => _userSelected = value),
@@ -126,6 +145,33 @@ class _LoginPageState extends State<LoginPage> {
           child: Text(value),
         );
       }).toList(),
+    );
+  }
+
+  Widget _loginButton() {
+    return Container(
+      height: 40.0,
+      width: 110.0,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          if (!_claveLogin.currentState.validate()) {
+            return;
+          }
+          
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+          
+          Navigator.pushReplacementNamed(context, 'home');
+        },
+        icon: Icon(Icons.login),
+        label: Text('Entrar'),                
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+          onPrimary: Colors.red,        
+        ),
+      ),
     );
   }
 }
