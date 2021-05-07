@@ -5,7 +5,7 @@ class ElectronicsTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      padding: EdgeInsets.symmetric(horizontal: 15.0),
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         itemCount: 6,
@@ -25,7 +25,8 @@ class ElectronicsTabs extends StatelessWidget {
                 'https://serviciostecnicosmovil.com/wp-content/uploads/2019/09/electronica.jpg'),
             placeholder: AssetImage('assets/img/jar-loading.gif'),
             fadeInDuration: Duration(milliseconds: 100),
-            height: 300.0,
+            width: double.infinity,
+            height: 275.0,
             fit: BoxFit.cover,
           ),
           Container(
@@ -55,9 +56,12 @@ class ElectronicsTabs extends StatelessWidget {
     return Column(
       children: [
         SizedBox(height: 15.0),
-        Card(
+        Card(          
+          margin: EdgeInsets.zero,
+          elevation: 4.0,
           child: card,
         ),
+        SizedBox(height: 15.0),
       ],
     );
   }

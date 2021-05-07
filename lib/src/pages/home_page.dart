@@ -29,9 +29,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       appBar: AppBar(
         title: Text('Préstamo de equipo'),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.shopping_cart), onPressed: (){}),
-          IconButton(icon: Icon(Icons.person), onPressed: (){}),
-          IconButton(icon: Icon(Icons.logout), onPressed: (){})
+          IconButton(icon: Icon(Icons.shopping_cart), onPressed: () => Navigator.pushNamed(context, 'myCar')),
+          IconButton(icon: Icon(Icons.person), onPressed: () => Navigator.pushNamed(context, 'myProfile')),
+          IconButton(icon: Icon(Icons.logout), onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil('login', (Route<dynamic> route) => false))
         ],
         bottom: getTabBar(),
       ),
